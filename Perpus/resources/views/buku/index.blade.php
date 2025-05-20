@@ -20,7 +20,7 @@
         <h5 class="card-title mb-0">Daftar Buku</h5>
         <div style="position: relative; width: 230px;">
             <input type="text" id="searchInput" class="form-control" placeholder="Pencarian" style="height: 40px; padding-left: 35px;">
-            <i class="fas fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #aaa;"></i>
+            <i class="ti ti-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #aaa;"></i>
         </div>
     </div>
 
@@ -34,7 +34,7 @@
                         <div class="card shadow-sm" style="border-radius: 0.5rem;">
                             <img src="{{ $item['foto'] }}" class="card-img-top rounded-top" >
                             <div class="card-body p-2">
-                                <h6 class="card-title text-center mb-2">{{ $item['judul'] }}</h6>
+                                <h4 class="card-title text-center mb-2">{{ $item['judul'] }}</h4>
 
                                 <div class="mb-1 d-flex" style="font-size: 13px;">
                                     <strong class="w-50">Genre</strong>
@@ -57,10 +57,10 @@
                                     <a href="{{ route('buku.edit', $item['id']) }}" class="btn btn-sm btn-warning">
                                         <i class="ti ti-pencil" style="font-size: 18px;"></i>
                                     </a>
-                                    <form action="{{ route('buku.destroy', $item['id']) }}" method="post" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                                    <form action="{{ route('buku.destroy', $item['id']) }}" method="post">
                                         @method('DELETE')
                                         @csrf
-                                        <button type="submit" class="btn btn-sm btn-danger">
+                                        <button type="submit" class="btn btn-sm btn-danger show_confirm">
                                             <i class="ti ti-trash" style="font-size: 18px;"></i>
                                         </button>
                                     </form>
@@ -74,7 +74,6 @@
         <script src="{{ url('js/app.js') }}"></script>
     </body>
 </div>
-<script src="{{ url('js/app.js') }}"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @if (session('success'))
@@ -86,7 +85,7 @@
     });
 </script>
 @endif
-<!-- confirm dialog -->
+<!-- confirm dialog Hapus-->
 <script type="text/javascript">
     $('.show_confirm').click(function(event) {
         let form =  $(this).closest("form");

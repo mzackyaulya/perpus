@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Buku extends Model
+class Anggota extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id';
@@ -15,7 +15,7 @@ class Buku extends Model
 
     protected $fillable =
     [
-        'foto','judul','genre','penerbit','tahun','stok'
+        'nis','nama','jurusan','email','tanggal_lahir'
     ];
 
     protected static function boot()
