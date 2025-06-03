@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\PengurusController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,3 +14,6 @@ Route::resource('anggota', AnggotaController::class)->parameters([
     'anggota' => 'anggota'
 ]);
 
+Route::resource('pengurus', PengurusController::class)->parameters([
+    'pengurus' => 'pengurus'
+]);
