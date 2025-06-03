@@ -8,10 +8,11 @@ use Illuminate\Http\Request;
 class AnggotaController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         $anggota = Anggota::all();
-        return view('anggota.index')->with('anggota', $anggota);
+        return view('anggota.index')
+                ->with('anggota', $anggota);
     }
 
     public function create()
@@ -30,7 +31,7 @@ class AnggotaController extends Controller
         ]);
 
         Anggota::create($val);
-        return redirect()->route('anggota.index')->with('success', $val['nama'].' Berhasil di Simpan');
+        return redirect()->route('anggota.index')->with('success',' Data '. $val['nama'].' berhasil di simpan ');
     }
 
     /**
@@ -49,9 +50,6 @@ class AnggotaController extends Controller
         return view('anggota.edit')->with('anggota', $anggota);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Anggota $anggota)
     {
         $val = $request-> validate([
@@ -63,7 +61,7 @@ class AnggotaController extends Controller
         ]);
 
         $anggota -> update($val);
-        return redirect()->route('anggota.index')->with('success', $val['nama'].' Berhasil di Perbarui');
+        return redirect()->route('anggota.index')->with('success',' Data '. $val['nama']. ' berhasil di perbarui ');
     }
 
     /**
@@ -72,6 +70,6 @@ class AnggotaController extends Controller
     public function destroy(Anggota $anggota)
     {
         $anggota->delete();
-        return redirect()->route('anggota.index')->with('success','Data Anggota Berhasil di Hapus');
+        return redirect()->route('anggota.index')->with('success',' Data '. $anggota['nama'].' berhasil di hapus ');
     }
 }

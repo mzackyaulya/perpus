@@ -4,7 +4,7 @@
 
 @section('content')
 <br>
-<div class="card m-4 p-3">
+<div class="card m-4 p-3" style="width: 100%;">
     <head>
         <link href="{{ url('css/app.css') }}" rel="stylesheet">
         <style>
@@ -98,7 +98,8 @@
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "iya"
+            confirmButtonText: "iya",
+            cancelButtonText: "Tidak"
         })
         .then((willDelete) => {
             if (willDelete.isConfirmed) {

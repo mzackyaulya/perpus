@@ -18,6 +18,7 @@
           <table class="table table-bordered">
             <thead>
               <tr>
+                <th class="text-center">No</th>
                 <th class="text-center">NIS</th>
                 <th class="text-center">Nama</th>
                 <th class="text-center">Email</th>
@@ -27,8 +28,9 @@
               </tr>
             </thead>
             <tbody id="anggotaTable">
-                @foreach ($anggota as $item)
+                @foreach ($anggota as $index => $item)
                 <tr>
+                    <td class="text-center">{{ $index + 1 }}</td>
                     <td class="text-center">{{ $item['nis'] }}</td>
                     <td class="text-center">{{ $item['nama'] }}</td>
                     <td class="text-center">{{ $item['email'] }}</td>
@@ -73,12 +75,13 @@
         event.preventDefault();
         Swal.fire({
             title: "Apakah Ingin Hapus? ",
-            text: "data yang dihapus tidak bisa kembali!",
+            text: "Data yang dihapus tidak bisa kembali!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "iya"
+            confirmButtonText: "Ya",
+            cancelButtonText: "Tidak"
         })
         .then((willDelete) => {
             if (willDelete.isConfirmed) {

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('jurusan');
             $table->string('email');
-            $table->date('tanggal_lahir');
+            $table->string('tanggal_lahir');
             $table->timestamps();
         });
     }
