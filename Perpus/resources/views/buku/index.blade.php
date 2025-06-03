@@ -98,7 +98,7 @@
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "iya",
+            confirmButtonText: "Ya",
             cancelButtonText: "Tidak"
         })
         .then((willDelete) => {
