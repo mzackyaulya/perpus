@@ -11,7 +11,7 @@
 
   <!-- Favicons -->
   <link href="{{ url('assets/images/logos/logo.png') }}" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="{{ url('assets/images/logos/logo.png')}}" rel="apple-touch-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -38,7 +38,7 @@
     <nav id="navmenu" class="navmenu">
       <ul>
         <li><a href="#hero" class="active"><i class="bi bi-house navicon"></i><span>Home</span></a></li>
-        <li><a href="#about"><i class="bi bi-person navicon"></i><span>About</span></a></li>
+        <li><a href="{{ url('login') }}"><i class="bi bi-right-to-bracket navicon"></i><span>Login</span></a></li>
         <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i><span>Resume</span></a></li>
         <li><a href="#portfolio"><i class="bi bi-images navicon"></i><span>Portfolio</span></a></li>
         <li><a href="#services"><i class="bi bi-hdd-stack navicon"></i><span>Services</span></a></li>
@@ -53,18 +53,16 @@
     <!-- Hero Section -->
     <section id="hero" class="hero section light-background">
 
-      <img src="assets/img/hero-bg.jpg" alt="">
+      <img src="{{ url('assets/images/backgrounds/perpus.jpg')}}" alt="">
 
       <div class="container" data-aos="zoom-out">
         <div class="row justify-content-center">
           <div class="col-lg-9">
-            <h2>Brandon Johnson</h2>
-            <p>I'm <span class="typed" data-typed-items="Designer, Developer, Freelancer, Photographer">Designer</span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
+            <h2>Selamat Datang di PERPUSTAKAAN</h2>
+            <p>SMA <span class="typed" data-typed-items="Muhammadiyah 2 Palembang"></span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
             <div class="social-links">
-              <a href="#"><i class="bi bi-twitter-x"></i></a>
-              <a href="#"><i class="bi bi-facebook"></i></a>
-              <a href="#"><i class="bi bi-instagram"></i></a>
-              <a href="#"><i class="bi bi-linkedin"></i></a>
+              <a href="https://www.instagram.com/sma.muhammadiyah2plg_?igsh=MWZidG82NDh3ejk0Mw=="><i class="bi bi-instagram"></i></a>
+              <a href="https://www.facebook.com/share/1FbcpVjHDk/"><i class="bi bi-facebook"></i></a>
             </div>
           </div>
         </div>
