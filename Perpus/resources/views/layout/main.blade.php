@@ -33,7 +33,7 @@
                 <span class="hide-menu">Home</span>
                 </li>
                 <li class="sidebar-item">
-                <a class="sidebar-link" href="./index.html" aria-expanded="false">
+                <a class="sidebar-link" href="{{ url('dashboard') }}" aria-expanded="false">
                     <span>
                     <i class="ti ti-home"></i>
                     </span>
@@ -61,45 +61,25 @@
                 </a>
                 </li>
                 <li class="sidebar-item">
-                <a class="sidebar-link" href="{{ url('pengurus') }}" aria-expanded="false">
-                    <span>
-                    <i class="ti ti-user"></i>
-                    </span>
-                    <span class="hide-menu">Perpustakawan</span>
-                </a>
+                    <a class="sidebar-link" href="{{ url('pengurus') }}" aria-expanded="false">
+                        <span>
+                        <i class="ti ti-user"></i>
+                        </span>
+                        <span class="hide-menu">Perpustakawan</span>
+                    </a>
                 </li>
                 <li class="sidebar-item">
-                <a class="sidebar-link" href="{{ url('peminjaman') }}" aria-expanded="false">
-                    <span>
-                    <i class="ti ti-address-book"></i>
-                    </span>
-                    <span class="hide-menu">Peminjaman</span>
-                </a>
-                </li>
-                <li class="nav-small-cap">
-                <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                <span class="hide-menu">AUTH</span>
-                </li>
-                <li class="sidebar-item">
-                <a class="sidebar-link" href="{{ url('login') }}" aria-expanded="false">
-                    <span>
-                    <i class="ti ti-login"></i>
-                    </span>
-                    <span class="hide-menu">Login</span>
-                </a>
-                </li>
-                <li class="sidebar-item">
-                <a class="sidebar-link" href="{{ url('register') }}" aria-expanded="false">
-                    <span>
-                    <i class="ti ti-user-plus"></i>
-                    </span>
-                    <span class="hide-menu">Register</span>
-                </a>
+                    <a class="sidebar-link" href="{{ url('peminjaman') }}" aria-expanded="false">
+                        <span>
+                        <i class="ti ti-address-book"></i>
+                        </span>
+                        <span class="hide-menu">Peminjaman</span>
+                    </a>
                 </li>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
-      </div>
+    </div>
       <!-- End Sidebar scroll-->
     </aside>
     <!--  Sidebar End -->
@@ -122,19 +102,14 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                   <div class="message-body">
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                    <a href="{{ url('profile') }}" class="d-flex align-items-center gap-2 dropdown-item">
                       <i class="ti ti-user fs-6"></i>
                       <p class="mb-0 fs-3">My Profile</p>
                     </a>
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-mail fs-6"></i>
-                      <p class="mb-0 fs-3">My Account</p>
-                    </a>
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-list-check fs-6"></i>
-                      <p class="mb-0 fs-3">My Task</p>
-                    </a>
-                    <a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                    </form>
                   </div>
                 </div>
               </li>
