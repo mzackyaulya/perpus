@@ -80,8 +80,11 @@ class PeminjamanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Peminjaman $peminjaman)
+    public function edit(Peminjaman $peminjaman,Request $request)
     {
+        if ($request->user()->cannot('edit', Peminjaman::class)){
+            abort(403);
+        }
         $buku = Buku::all();
         $anggota = Anggota::all();
         $pengurus = Pengurus::all();
@@ -95,6 +98,9 @@ class PeminjamanController extends Controller
     public function update(Request $request, Peminjaman $peminjaman)
     {
 
+        if ($request->user()->cannot('update', Peminjaman::class)){
+            abort(403);
+        }
         if ($request->has('ubah_status')) {
             if ($peminjaman->status != 'diKembalikan') {
                 $buku = Buku::find($peminjaman->buku_id);

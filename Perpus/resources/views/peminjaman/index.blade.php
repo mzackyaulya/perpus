@@ -25,7 +25,9 @@
                 <th class="text-center">Tanggal Peminjaman</th>
                 <th class="text-center">Tanggal Pengembalian</th>
                 <th class="text-center">Status</th>
-                <th class="text-center">Aksi</th>
+                @can('text', App\Peminjaman::class)
+                    <th class="text-center">Aksi</th>
+                @endcan
               </tr>
             </thead>
             <tbody id="pengurusTable">
@@ -48,19 +50,25 @@
                             {{ $item['status'] }}
                         </span>
                     </td>
-                    <td class="text-center">
-                        <a href="{{route('peminjaman.edit', $item["id"])}}" class="btn btn-sm btn-warning" title="Edit">
-                            <i class="ti ti-edit"></i>
-                        </a>
-                        <form action="{{ route('peminjaman.update', $item['id']) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin mengembalikan buku ini?')">
-                            @csrf
-                            @method('PUT')
-                            <input type="hidden" name="ubah_status" value="1">
-                            <button type="submit" class="btn btn-sm btn-success" title="Kembalikan">
-                                <i class="ti ti-check"></i>
-                            </button>
-                        </form>
-                    </td>
+                    @can('text',App\Peminjaman::class)
+                        <td class="text-center">
+                            @can('update', $item)
+                                <a href="{{route('peminjaman.edit', $item["id"])}}" class="btn btn-sm btn-warning" title="Edit">
+                                    <i class="ti ti-edit"></i>
+                                </a>
+                            @endcan
+                            @can('status', $item)
+                                <form action="{{ route('peminjaman.update', $item['id']) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin mengembalikan buku ini?')">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="hidden" name="ubah_status" value="1">
+                                    <button type="submit" class="btn btn-sm btn-success" title="Kembalikan">
+                                        <i class="ti ti-check"></i>
+                                    </button>
+                                </form>
+                            @endcan
+                        </td>
+                    @endcan
                 </tr>
                 @endforeach
             </tbody>

@@ -20,8 +20,11 @@ class PengurusController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
+        if ($request->user()->cannot('create', Pengurus::class)){
+            abort(403);
+        }
         return view('pengurus.create');
     }
 
@@ -30,6 +33,9 @@ class PengurusController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->user()->cannot('store', Pengurus::class)){
+            abort(403);
+        }
         $val = $request -> validate([
             'nuptk' => 'required|max:10',
             'nama'  => 'required|max:45',
@@ -52,8 +58,11 @@ class PengurusController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pengurus $pengurus)
+    public function edit(Pengurus $pengurus,Request $request)
     {
+        if ($request->user()->cannot('edit', Pengurus::class)){
+            abort(403);
+        }
         return view('pengurus.edit')->with('pengurus', $pengurus);
     }
 
@@ -62,6 +71,9 @@ class PengurusController extends Controller
      */
     public function update(Request $request, Pengurus $pengurus)
     {
+        if ($request->user()->cannot('update', Pengurus::class)){
+            abort(403);
+        }
         $val = $request -> validate([
             'nuptk' => 'required|max:10',
             'nama'  => 'required|max:45',

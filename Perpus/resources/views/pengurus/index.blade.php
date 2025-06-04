@@ -13,18 +13,22 @@
                 <i class="ti ti-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #aaa;"></i>
             </div>
         </div>
-        <a href="{{ route('pengurus.create') }}" class="btn btn-primary col-lg-12">Tambah Perpustakawan</a>
+        @can('create', App\Pengurus::class)
+            <a href="{{ route('pengurus.create') }}" class="btn btn-primary col-lg-12">Tambah Perpustakawan</a>
+        @endcan
         <div class="table-responsive pt-3">
           <table class="table table-bordered">
             <thead>
-              <tr>
-                <th class="text-center">No</th>
-                <th class="text-center">NUPTK</th>
-                <th class="text-center">Nama</th>
-                <th class="text-center">Email</th>
-                <th class="text-center">Tanggal Lahir</th>
-                <th class="text-center">Aksi</th>
-              </tr>
+                <tr>
+                    <th class="text-center">No</th>
+                    <th class="text-center">NUPTK</th>
+                    <th class="text-center">Nama</th>
+                    <th class="text-center">Email</th>
+                    <th class="text-center">Tanggal Lahir</th>
+                    @can('text',App\Pengurus::class)
+                        <th class="text-center">Aksi</th>
+                    @endcan
+                </tr>
             </thead>
             <tbody id="pengurusTable">
                 @foreach ($pengurus as $index => $item)
@@ -34,18 +38,24 @@
                     <td class="text-center">{{ $item['nama'] }}</td>
                     <td class="text-center">{{ $item['email'] }}</td>
                     <td class="text-center">{{ \Carbon\Carbon::parse($item['tanggal_lahir'])->format('d-m-Y') }}</td>
-                    <td class="text-center">
-                        <form action="{{route('pengurus.destroy', $item["id"])}}" method="post" style="display:inline">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" class="btn btn-sm btn-danger show_confirm">
-                                <i class="ti ti-trash"></i>
-                            </button>
-                        </form>
-                        <a href="{{route('pengurus.edit', $item["id"])}}" class="btn btn-sm btn-warning" title="Edit">
-                            <i class="ti ti-edit"></i>
-                        </a>
-                    </td>
+                    @can('text', App\Pengurus::class)
+                        <td class="text-center">
+                            @can('delete', $item)
+                                <form action="{{route('pengurus.destroy', $item["id"])}}" method="post" style="display:inline">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-danger show_confirm">
+                                        <i class="ti ti-trash"></i>
+                                    </button>
+                                </form>
+                            @endcan
+                            @can('update', $item)
+                                <a href="{{route('pengurus.edit', $item["id"])}}" class="btn btn-sm btn-warning" title="Edit">
+                                    <i class="ti ti-edit"></i>
+                                </a>
+                            @endcan
+                        </td>
+                    @endcan
                 </tr>
                 @endforeach
             </tbody>

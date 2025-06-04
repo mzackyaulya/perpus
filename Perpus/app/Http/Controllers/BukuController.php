@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Buku;
 use Illuminate\Http\Request;
-use PhpParser\Node\Stmt\Return_;
 
 class BukuController extends Controller
 {
@@ -14,13 +13,19 @@ class BukuController extends Controller
         return view("buku.index")->with("buku",$buku);
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        if ($request->user()->cannot('create', Buku::class)){
+            abort(403);
+        }
         return view("buku.create");
     }
 
     public function store(Request $request)
     {
+        if ($request->user()->cannot('store', Buku::class)){
+            abort(403);
+        }
         $val = $request->validate([
             'foto'      => 'required|url',
             'judul'     => 'required|max:50',
@@ -39,13 +44,19 @@ class BukuController extends Controller
         //
     }
 
-    public function edit(Buku $buku)
+    public function edit(Buku $buku,Request $request)
     {
+        if ($request->user()->cannot('edit', Buku::class)){
+            abort(403);
+        }
         return view('buku.edit')->with('buku', $buku);
     }
 
     public function update(Request $request, Buku $buku)
     {
+        if ($request->user()->cannot('update', Buku::class)){
+            abort(403);
+        }
         $val = $request->validate([
             'foto'      => 'required|url',
             'judul'     => 'required|max:50',
@@ -59,7 +70,7 @@ class BukuController extends Controller
         return redirect()->route('buku.index')->with('success', $val['judul'].' Berhasil di Perbarui');
     }
 
-    public function destroy(Buku $buku)
+    public function destroy(Buku $buku,Request $request)
     {
         $buku->delete();
         return redirect()->route('buku.index')->with('success','Data Buku Berhasil di Hapus');

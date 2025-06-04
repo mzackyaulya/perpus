@@ -13,7 +13,9 @@
                 <i class="ti ti-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #aaa;"></i>
             </div>
         </div>
-        <a href="{{ route('anggota.create') }}" class="btn btn-primary col-lg-12">Tambah Anggota</a>
+        @can('create', App\Anggota::class)
+            <a href="{{ route('anggota.create') }}" class="btn btn-primary col-lg-12">Tambah Anggota</a>
+        @endcan
         <div class="table-responsive pt-3">
           <table class="table table-bordered">
             <thead>
@@ -24,7 +26,9 @@
                 <th class="text-center">Email</th>
                 <th class="text-center">Jurusan</th>
                 <th class="text-center">Tanggal Lahir</th>
-                <th class="text-center">Aksi</th>
+                @can('text', App\Anggota::class)
+                    <th class="text-center">Aksi</th>
+                @endcan
               </tr>
             </thead>
             <tbody id="anggotaTable">
@@ -36,18 +40,24 @@
                     <td class="text-center">{{ $item['email'] }}</td>
                     <td class="text-center">{{ $item['jurusan'] }}</td>
                     <td class="text-center">{{ $item['tanggal_lahir'] }}</td>
-                    <td class="text-center">
-                        <form action="{{route('anggota.destroy', $item["id"])}}" method="post" style="display:inline">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" class="btn btn-sm btn-danger show_confirm">
-                                <i class="ti ti-trash"></i>
-                            </button>
-                        </form>
-                        <a href="{{route('anggota.edit', $item["id"])}}" class="btn btn-sm btn-warning" title="Edit">
-                            <i class="ti ti-edit"></i>
-                        </a>
-                    </td>
+                    @can('text', App\Anggota::class)
+                        <td class="text-center">
+                            @can('delete', $item)
+                                <form action="{{route('anggota.destroy', $item["id"])}}" method="post" style="display:inline">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-danger show_confirm">
+                                        <i class="ti ti-trash"></i>
+                                    </button>
+                                </form>
+                            @endcan
+                            @can('update', $item)
+                                <a href="{{route('anggota.edit', $item["id"])}}" class="btn btn-sm btn-warning" title="Edit">
+                                    <i class="ti ti-edit"></i>
+                                </a>
+                            @endcan
+                        </td>
+                    @endcan
                 </tr>
                 @endforeach
             </tbody>

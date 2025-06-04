@@ -26,7 +26,9 @@
 
     <body>
         <div class="container">
-            <a href="{{ route('buku.create') }}" class="btn btn-primary col-lg-12 mb-3">Tambah Buku</a>
+            @can('create', App\Buku::class)
+                <a href="{{ route('buku.create') }}" class="btn btn-primary col-lg-12 mb-3">Tambah Buku</a>
+            @endcan
             <hr>
             <div class="row" id="ruteTable">
                 @foreach ($buku as $item)
@@ -54,16 +56,20 @@
                                 </div>
                                 <br>
                                 <div class="d-flex justify-content-center gap-2 mt-2">
-                                    <a href="{{ route('buku.edit', $item['id']) }}" class="btn btn-sm btn-warning">
-                                        <i class="ti ti-pencil" style="font-size: 18px;"></i>
-                                    </a>
-                                    <form action="{{ route('buku.destroy', $item['id']) }}" method="post">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="submit" class="btn btn-sm btn-danger show_confirm">
-                                            <i class="ti ti-trash" style="font-size: 18px;"></i>
-                                        </button>
-                                    </form>
+                                    @can('update', $item)
+                                        <a href="{{ route('buku.edit', $item->id) }}" class="btn btn-sm btn-warning">
+                                            <i class="ti ti-pencil" style="font-size: 18px;"></i>
+                                        </a>
+                                    @endcan
+                                    @can('delete', $item)
+                                        <form action="{{ route('buku.destroy', $item['id']) }}" method="post">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm btn-danger show_confirm">
+                                                <i class="ti ti-trash" style="font-size: 18px;"></i>
+                                            </button>
+                                        </form>
+                                    @endcan
                                 </div>
                             </div>
                         </div>

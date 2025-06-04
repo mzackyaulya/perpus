@@ -90,15 +90,17 @@
         <nav class="navbar navbar-expand-lg navbar-light">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <h1>Selamat Datang di Perpustakaan</h1>
+                <h2 class="mb-1 fw-semibold ">
+                    Selamat Datang, <span class="text-info"> {{ Auth::user()->name }}</span> di Perpustakaan
+                </h2>
             </li>
           </ul>
           <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
             <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
               <li class="nav-item dropdown">
-                <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
-                  aria-expanded="false">
-                  <img src="../assets/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
+                <a class="nav-link nav-icon-hover d-flex align-items-center gap-2" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none;">
+                    <img src="{{ url('assets/images/profile/user-1.jpg') }}" alt="User Profile" width="40" height="40" class="rounded-circle border border-2 border-secondary">
+                    <span class="fw-semibold text-dark">{{ Auth::user()->name }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                   <div class="message-body">
